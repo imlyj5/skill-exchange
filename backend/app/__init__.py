@@ -19,7 +19,7 @@ def create_app(config=None):
     # Configure CORS to allow file uploads and static file serving
     CORS(app, resources={
         r"/*": {
-            "origins": ["http://localhost:3000", "http://localhost:3001"],
+            "origins": ["http://localhost:3000", "http://localhost:3001","https://skill-exchange-1-m2ba.onrender.com"],
             "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
             "allow_headers": ["Content-Type", "Authorization"],
             "supports_credentials": True
