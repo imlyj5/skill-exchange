@@ -8,7 +8,7 @@ import ChatPage from "./components/ChatPage/ChatPage";
 import HowItWorksPage from "./components/HowItWorksPage/HowItWorksPage";
 import UserDropdown from "./components/UserDropdown/UserDropdown";
 
-export const API_URL = "http://127.0.0.1:5000";
+export const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:5000";
 
 // Main application component for Skill Exchange App
 // Handles global state, navigation, and API integration
