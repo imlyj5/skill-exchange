@@ -1,6 +1,7 @@
 import React from "react";
 import AuthForm from "../AuthForm/AuthForm";
 
+// Signup form wrapper for AuthForm
 const SignupForm = ({ onSignup }) => {
   const signupFields = [
     { name: "name", placeholder: "Name" },

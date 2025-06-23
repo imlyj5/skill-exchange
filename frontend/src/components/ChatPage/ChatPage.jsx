@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./ChatPage.css"; // (create this file for styling)
+import "./ChatPage.css";
 import ChatThread from "../ChatThread/ChatThread";
 import MessageInput from "../MessageInput/MessageInput";
 import RatingForm from "../RatingForm/RatingForm";
@@ -8,13 +8,15 @@ import axios from "axios";
 import { API_URL } from "../../App";
 import LegoAvatar from "../../assets/lego-avatar.jpg";
 
+// Chat page for viewing and sending messages
+// Handles message fetching, chat selection, and rating
 const ChatPage = ({ match, matches, onSelectConversation, onBack, user, onNavigate, onLogout, onRatingSuccess }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showRating, setShowRating] = useState(false);
   const [showBanner, setShowBanner] = useState(false);
 
-  // Fetch messages when match changes
+  // Fetch messages when match or user changes
   useEffect(() => {
     if (match && user) {
       fetchMessages();
@@ -53,7 +55,6 @@ const ChatPage = ({ match, matches, onSelectConversation, onBack, user, onNaviga
     try {
       const chatId = match.chat_id || match.id;
       const response = await axios.get(`${API_URL}/chats/${chatId}/messages`);
-      // Handle new API response format: {"messages": [...]}
       const messagesData = response.data.messages || response.data || [];
       setMessages(messagesData);
     } catch (error) {
@@ -76,13 +77,13 @@ const ChatPage = ({ match, matches, onSelectConversation, onBack, user, onNaviga
     };
 
     try {
-      // Optimistically add message to UI
+      // Add message to UI
       setMessages(prev => [...prev, newMessage]);
       
       // Send to backend
       const response = await axios.post(`${API_URL}/chats/${match.id}/messages`, newMessage);
       
-      // Update with server response (in case of ID assignment, etc.)
+      // Update with server response
       setMessages(prev => prev.map(msg => 
         msg === newMessage ? response.data : msg
       ));
@@ -210,7 +211,7 @@ const ChatPage = ({ match, matches, onSelectConversation, onBack, user, onNaviga
         </div>
       )}
       
-      {/* Gentle Reminder Banner */}
+      {/* Reminder Banner */}
       {showBanner && !match.is_rated_by_current_user && (
         <div className="rating-banner">
           How was your session with {match?.other_user?.name}?{" "}

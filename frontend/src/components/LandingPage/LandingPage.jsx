@@ -1,21 +1,25 @@
 import React, { useState } from "react";
-import "./LandingPage.css"; // We'll create this for styling
+import "./LandingPage.css";
 import LoginForm from "../LoginForm/LoginForm";
 import SignupForm from "../SignupForm/SignupForm";
 // Illustration source: https://blush.design/collections/2CS20tnIa14HG1NsRPdP/brazuca
 import LandingImg from "../../assets/Landing.png";
 
+// Landing page for unauthenticated users
+// Handles login/signup modal and navigation to How It Works
 const LandingPage = ({ onLogin, onNavigate }) => {
   const [showModal, setShowModal] = useState(false);
-  const [mode, setMode] = useState("login"); // or "signup"
+  const [mode, setMode] = useState("login");
   const [signupSuccess, setSignupSuccess] = useState(false);
 
+  // Handle login: call parent handler, close modal, reset signup state
   const handleLogin = (userData) => {
     onLogin && onLogin(userData);
     setShowModal(false);
     setSignupSuccess(false);
   };
 
+  // Handle signup: show success message and switch to login mode
   const handleSignup = () => {
     setSignupSuccess(true);
     setMode("login");
@@ -26,7 +30,7 @@ const LandingPage = ({ onLogin, onNavigate }) => {
       <nav className="landing-nav">
         <span className="logo">Skill Exchange App</span>
         <div className="nav-links">
-          <button className="nav-btn" onClick={() => onNavigate && onNavigate('howitworks')}>How it works</button>
+          <button className="nav-btn" onClick={() => onNavigate("howitworks")}>How it works</button>
         </div>
       </nav>
       <div className="landing-content">

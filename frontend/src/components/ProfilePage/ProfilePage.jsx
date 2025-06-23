@@ -5,6 +5,8 @@ import UserDropdown from "../UserDropdown/UserDropdown";
 import { API_URL } from "../../App";
 import LegoAvatar from "../../assets/lego-avatar.jpg";
 
+// Profile page for viewing and editing user information
+// Handles avatar upload, field editing, and profile section rendering
 const ProfilePage = ({ user, onSave, onNavigate, isReadOnly, onLogout }) => {
   const [editField, setEditField] = useState(null);
   const [editValue, setEditValue] = useState("");
@@ -12,6 +14,7 @@ const ProfilePage = ({ user, onSave, onNavigate, isReadOnly, onLogout }) => {
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef(null);
 
+  // Handle edit button: set the field to be edited and initialize edit value
   const handleEdit = (field) => {
     setEditField(field);
     if (field === "user_info") {
@@ -27,6 +30,7 @@ const ProfilePage = ({ user, onSave, onNavigate, isReadOnly, onLogout }) => {
     }
   };
 
+  // Handle image selection: preview and upload new avatar
   const handleImageSelect = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -42,6 +46,7 @@ const ProfilePage = ({ user, onSave, onNavigate, isReadOnly, onLogout }) => {
     }
   };
 
+  // Handle image upload: send file to backend and update user
   const handleImageUpload = async (file) => {
     setUploading(true);
     try {
@@ -70,6 +75,7 @@ const ProfilePage = ({ user, onSave, onNavigate, isReadOnly, onLogout }) => {
     }
   };
 
+  // Handle save: update profile field via API and update parent state
   const handleSave = async () => {
     try {
       let value = editValue;
@@ -95,6 +101,7 @@ const ProfilePage = ({ user, onSave, onNavigate, isReadOnly, onLogout }) => {
     }
   };
 
+  // Handle cancel: reset edit state
   const handleCancel = () => {
     setEditField(null);
     setEditValue("");

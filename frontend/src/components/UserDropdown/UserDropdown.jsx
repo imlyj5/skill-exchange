@@ -3,6 +3,8 @@ import "./UserDropdown.css";
 import { API_URL } from "../../App";
 import LegoAvatar from "../../assets/lego-avatar.jpg";
 
+// User dropdown menu for navigation and logout
+// Handles open/close state, outside click, and avatar fallback
 const UserDropdown = ({ user, onNavigate, onLogout }) => {
   const [open, setOpen] = useState(false);
   const ref = useRef();
@@ -25,6 +27,7 @@ const UserDropdown = ({ user, onNavigate, onLogout }) => {
     onLogout && onLogout();
   };
   
+  // Get avatar image URL, falling back to default if needed
   const getImageUrl = () => {
     if (!user.image_url) {
       return LegoAvatar;

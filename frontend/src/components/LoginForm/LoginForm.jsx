@@ -1,6 +1,7 @@
 import React from "react";
 import AuthForm from "../AuthForm/AuthForm";
 
+// Login form wrapper for AuthForm
 const LoginForm = ({ onLogin }) => {
   const loginFields = [
     { name: "email", placeholder: "Email", type: "email" },

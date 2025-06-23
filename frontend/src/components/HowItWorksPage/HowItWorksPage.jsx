@@ -1,26 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import UserDropdown from "../UserDropdown/UserDropdown";
-import LoginForm from "../LoginForm/LoginForm";
-import SignupForm from "../SignupForm/SignupForm";
 import "../LandingPage/LandingPage.css";
 import LandingImg from "../../assets/Landing.png";
 
-const HowItWorksPage = ({ user, onLogin, onNavigate, onLogout }) => {
-  const [showModal, setShowModal] = useState(false);
-  const [mode, setMode] = useState("login"); // or "signup"
-  const [signupSuccess, setSignupSuccess] = useState(false);
-
-  const handleLogin = (userData) => {
-    onLogin && onLogin(userData);
-    setShowModal(false);
-    setSignupSuccess(false);
-  };
-
-  const handleSignup = () => {
-    setSignupSuccess(true);
-    setMode("login");
-  };
-
+// How It Works informational page
+const HowItWorksPage = ({ user, onNavigate, onLogout }) => {
   return (
     <div className="landing-root">
       <nav className="landing-nav">
@@ -56,11 +40,6 @@ const HowItWorksPage = ({ user, onLogin, onNavigate, onLogout }) => {
               <span role="img" aria-label="rate">⭐</span> After the session, mark complete to rate your partner
             </li>
           </ol>
-          {!user && (
-            <button className="landing-btn" onClick={() => setShowModal(true)}>
-              Login / Sign up
-            </button>
-          )}
         </div>
         <div className="landing-right">
           <img
@@ -70,37 +49,6 @@ const HowItWorksPage = ({ user, onLogin, onNavigate, onLogout }) => {
           />
         </div>
       </div>
-      {showModal && !user && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <div className="auth-toggle">
-              <button
-                className={mode === "login" ? "active" : ""}
-                onClick={() => setMode("login")}
-              >
-                Login
-              </button>
-              <button
-                className={mode === "signup" ? "active" : ""}
-                onClick={() => setMode("signup")}
-              >
-                Sign Up
-              </button>
-            </div>
-            {signupSuccess && (
-              <div className="success-message">
-                Sign up successful! Please login.
-              </div>
-            )}
-            {mode === "login" ? (
-              <LoginForm onLogin={handleLogin} />
-            ) : (
-              <SignupForm onSignup={handleSignup} />
-            )}
-            <button className="close-modal" onClick={() => setShowModal(false)}>×</button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

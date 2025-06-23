@@ -3,6 +3,8 @@ import "./ProfileForm.css";
 
 const MAX_SKILLS = 3;
 
+// Profile form for editing user information
+// Controlled form with handlers for skills and availability
 const ProfileForm = ({
   initialProfile,
   onSave,
@@ -10,20 +12,20 @@ const ProfileForm = ({
 }) => {
   const [form, setForm] = useState(initialProfile);
 
-  // Handle input changes
+  // Handle input changes for text fields
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
 
-  // Handle skills (comma separated)
+  // Handle skill input changes (comma separated, max 3)
   const handleSkillChange = (e, type) => {
     let skills = e.target.value.split(",").map(s => s.trim()).filter(Boolean);
     if (skills.length > MAX_SKILLS) skills = skills.slice(0, MAX_SKILLS);
     setForm({ ...form, [type]: skills });
   };
 
-  // Handle availability (comma separated)
+  // Handle availability input changes (comma separated)
   const handleAvailabilityChange = (e) => {
     let days = e.target.value.split(",").map(d => d.trim()).filter(Boolean);
     setForm({ ...form, availability: days });

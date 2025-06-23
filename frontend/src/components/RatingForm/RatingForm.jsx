@@ -3,6 +3,7 @@ import "./RatingForm.css";
 
 const MAX_STARS = 5;
 
+// Rating form for submitting a star rating and feedback after a learningsession
 const RatingForm = ({ onSubmit, onCancel, initialRating = 0, initialFeedback = "" }) => {
   const [rating, setRating] = useState(initialRating);
   const [hover, setHover] = useState(0);

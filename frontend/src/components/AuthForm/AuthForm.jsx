@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../App";
 
+// Generic authentication form for login/signup
+// Handles dynamic fields, API call, and error display
 const AuthForm = ({ 
   fields, 
   buttonText, 
   onSubmit, 
   endpoint, 
   onSuccess, 
-  errorMessage = "Authentication failed" 
+  errorMessage = "Authentication failed"
 }) => {
   const [formData, setFormData] = useState(
     fields.reduce((acc, field) => {
@@ -27,7 +29,7 @@ const AuthForm = ({
         `${API_URL}${endpoint}`,
         formData,
         {
-          headers: { 'Content-Type': 'application/json' },
+          headers: { "Content-Type": "application/json" },
           withCredentials: true
         }
       );

@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import "./ChatThread.css";
 
+// Chat thread component for displaying messages in a conversation
+// Scrolls to bottom on new messages
 const ChatThread = ({ messages, currentUser }) => {
   const messagesEndRef = useRef(null);
 
@@ -12,12 +14,14 @@ const ChatThread = ({ messages, currentUser }) => {
     scrollToBottom();
   }, [messages]);
 
+  // Format timestamp for display
   const formatTime = (timestamp) => {
     if (!timestamp) return "";
     const date = new Date(timestamp);
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
 
+  // Get sender name for a message
   const getSenderName = (message) => {
     // If the message has a sender_name, use it
     if (message.sender_name) {

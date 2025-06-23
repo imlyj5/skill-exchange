@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./MessageInput.css";
 
+// Message input component for sending chat messages
+// Controlled input with submit handler
 const MessageInput = ({ onSend, disabled }) => {
   const [input, setInput] = useState("");
 
