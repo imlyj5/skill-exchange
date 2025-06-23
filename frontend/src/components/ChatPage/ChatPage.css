@@ -179,7 +179,13 @@
   border-radius: 16px;
   box-shadow: 0 2px 16px rgba(0,0,0,0.15);
   padding: 2rem;
-  min-width: 350px;
+  max-width: 400px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .rating-banner {
