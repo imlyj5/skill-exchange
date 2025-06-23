@@ -5,10 +5,6 @@
 http://localhost:5000
 ```
 
-## Authentication
-
-login/register endpoints require authentication. 
-
 ## Endpoints
 
 ### Authentication
@@ -408,12 +404,6 @@ Content-Type: application/json
   "error": "Internal server error"
 }
 ```
-
-## Rate Limiting
-
-API requests are rate-limited to prevent abuse. Limits are:
-- 100 requests per minute for authenticated users
-- 20 requests per minute for unauthenticated users
 
 ## CORS
 

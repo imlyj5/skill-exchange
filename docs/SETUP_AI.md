@@ -64,18 +64,9 @@ You should see a response like:
 
 Check that AI matching is enabled by looking for `"ai_enabled": true` in the response. If you see `"ai_enabled": false`, the API key is not properly configured.
 
-## Features Enabled
-
-With AI matching enabled, your app will now:
-
-1. Intelligently match skills: "violin" will match with "music", "cooking" with "baking", etc.
-2. Find compatible skill pairs: Users can match if they can teach what the other wants to learn
-3. Show match details: Display which specific skills matched between users
-4. If AI is unavailable, falls back to exact matching
-
 ## How AI Matching Works
 
-The AI matching system:
+With AI matching enabled, your app will now:
 
 1. Checks skill compatibility: Uses AI to determine if skills are related (e.g., "piano" and "music theory")
 2. Finds bidirectional matches: Ensures both users can benefit from the exchange

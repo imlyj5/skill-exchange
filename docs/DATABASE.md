@@ -249,17 +249,3 @@ flask db history
 # Show current migration
 flask db current
 ```
-
-### Existing Migrations
-
-1. **Initial Migration** (`e9f553e1ebf6_.py`)
-   - Creates all base tables
-
-2. **Add Rating Model** (`1dffc659eeb6_add_rating_model_and_relationships.py`)
-   - Adds ratings table and relationships
-
-3. **Add Image URL** (`3e0e781efaa2_add_image_url_to_users_table.py`)
-   - Adds image_url field to users table
-
-4. **Add Is Read** (`880cde487140_add_is_read_to_message_model.py`)
-   - Adds is_read field to messages table
