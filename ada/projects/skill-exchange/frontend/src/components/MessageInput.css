@@ -1,0 +1,38 @@
+.message-input-form {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-top: 1px solid #eee;
+  background: #faf5ff;
+  gap: 1rem;
+}
+
+.message-input {
+  flex: 1;
+  padding: 0.7rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.send-btn {
+  background: #a78bfa;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.3rem;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.send-btn:disabled {
+  background: #ddd;
+  color: #aaa;
+  cursor: not-allowed;
+}
