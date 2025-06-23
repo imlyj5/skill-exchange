@@ -32,9 +32,6 @@ By fostering mutual support and peer-to-peer learning, it turns learning into a 
 
 ## Demo Screenshots
 
-### Landing Page
-![Landing Page](frontend/src/assets/Landing.png)
-
 ### Login or Sign Up
 ![Login or Sign Up](frontend/src/assets/Login%20or%20Sign%20up%20Demo.png)
 
