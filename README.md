@@ -5,6 +5,16 @@ A full-stack web application for matching users to exchange skills and learn fro
 ## Demo Video
 https://www.youtube.com/watch?v=AH1FVZp8-Ys
 
+## Deployment
+
+- **Backend** and **frontend** are deployed on [Render](https://skill-exchange-1-m2ba.onrender.com/).
+- The app uses a free-tier PostgreSQL database on Render, which will be deactivated on **2025-07-23**.
+- **AI Usage Note:**  
+  This is a personal project, so the deployed backend uses my own Gemini API key (set as an environment variable in Render). The Gemini API free tier allows up to 50 requests per day; if this quota is exceeded, AI-powered features will be temporarily unavailable until the quota resets (every 24 hours). If you see that AI features are not working, please try again the next day.
+- Feel free to play around with the app using the following credentials:
+    - Email: User1@gmail.com
+    - Password: 1234
+
 ## Problem Statement
 
 Learning new skills can be lonely, costly, and hard to stay motivated. Especially without guidance and support. While many people are eager to share what they know, there's no simple, peer-based way to connect based on shared interests and skills.
