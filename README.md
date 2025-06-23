@@ -2,6 +2,9 @@
 
 A full-stack web application for matching users to exchange skills and learn from each other.
 
+## Demo Video
+https://www.youtube.com/watch?v=AH1FVZp8-Ys
+
 ## Problem Statement
 
 Learning new skills can be lonely, costly, and hard to stay motivated. Especially without guidance and support. While many people are eager to share what they know, there's no simple, peer-based way to connect based on shared interests and skills.
