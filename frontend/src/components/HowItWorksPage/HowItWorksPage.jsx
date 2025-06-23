@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import UserDropdown from "./UserDropdown";
-import LoginForm from "./LoginForm";
-import SignupForm from "./SignupForm";
-import "./LandingPage.css";
-import LandingImg from "../assets/Landing.png";
+import UserDropdown from "../UserDropdown/UserDropdown";
+import LoginForm from "../LoginForm/LoginForm";
+import SignupForm from "../SignupForm/SignupForm";
+import "../LandingPage/LandingPage.css";
+import LandingImg from "../../assets/Landing.png";
 
 const HowItWorksPage = ({ user, onLogin, onNavigate, onLogout }) => {
   const [showModal, setShowModal] = useState(false);

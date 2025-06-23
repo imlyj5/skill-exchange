@@ -1,39 +1,23 @@
-# Skill Exchange Frontend
+# Frontend (React)
 
-React frontend for the Skill Exchange application where users can connect, share skills, and learn from each other.
+This directory contains the React frontend for the Skill Exchange platform.
 
-## Features
+## Manual Setup Instructions
 
-- User authentication and profiles
-- AI-powered skill matching
-- Real-time chat functionality
-- Profile image uploads
-- User ratings and reviews
-- Responsive design
-
-## Setup
-
-1. Install dependencies:
+### 1. Install dependencies
 ```bash
 npm install
 ```
 
-2. Start the development server:
+### 2. Start the development server
 ```bash
 npm start
 ```
 
-The app will open at [http://localhost:3000](http://localhost:3000).
+- The app will run at http://localhost:3000 by default.
+- Make sure the backend server is running at http://localhost:5000 (see backend/README.md).
 
-## Available Scripts
-
-- `npm start` - Runs the app in development mode
-- `npm test` - Launches the test runner
-- `npm run build` - Builds the app for production
-- `npm run eject` - Ejects from Create React App (one-way operation)
-
-## Development
-
-Make sure the backend server is running on port 5001 before starting the frontend.
-
-For more information about the project structure and API endpoints, see the main project README.
+## More
+- For API and backend setup, see [../backend/README.md](../backend/README.md)
+- For overall project info, see the root README.
+- Default avatar source: https://randomuser.me/api/portraits/lego/1.jpg

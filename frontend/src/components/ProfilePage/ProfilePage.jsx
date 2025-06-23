@@ -1,8 +1,9 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import "./ProfilePage.css";
-import UserDropdown from "./UserDropdown";
-import { API_URL } from "../App";
+import UserDropdown from "../UserDropdown/UserDropdown";
+import { API_URL } from "../../App";
+import LegoAvatar from "../../assets/lego-avatar.jpg";
 
 const ProfilePage = ({ user, onSave, onNavigate, isReadOnly, onLogout }) => {
   const [editField, setEditField] = useState(null);
@@ -115,7 +116,7 @@ const ProfilePage = ({ user, onSave, onNavigate, isReadOnly, onLogout }) => {
                 <img src={uploadPreview} alt="preview" className="profile-avatar" />
               ) : (
                 <img 
-                  src={user.image_url ? (user.image_url.startsWith('http') ? user.image_url : `${API_URL}${user.image_url}`) : "https://randomuser.me/api/portraits/lego/1.jpg"} 
+                  src={user.image_url ? (user.image_url.startsWith('http') ? user.image_url : `${API_URL}${user.image_url}`) : LegoAvatar} 
                   alt="avatar" 
                   className="profile-avatar" 
                 />

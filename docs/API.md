@@ -7,7 +7,7 @@ http://localhost:5000
 
 ## Authentication
 
-Most endpoints require authentication. Include session cookies from login/register requests.
+login/register endpoints require authentication. 
 
 ## Endpoints
 
@@ -22,9 +22,9 @@ Content-Type: application/json
 **Request Body:**
 ```json
 {
-  "name": "John Doe",
-  "email": "john@example.com",
-  "password": "securepassword123"
+  "name": "John",
+  "email": "john@gmail.com",
+  "password": "testpassword"
 }
 ```
 
@@ -32,8 +32,8 @@ Content-Type: application/json
 ```json
 {
   "id": 1,
-  "name": "John Doe",
-  "email": "john@example.com",
+  "name": "John",
+  "email": "john@gmail.com",
   "message": "User created successfully"
 }
 ```
@@ -47,8 +47,8 @@ Content-Type: application/json
 **Request Body:**
 ```json
 {
-  "email": "john@example.com",
-  "password": "securepassword123"
+  "email": "john@gmail.com",
+  "password": "testpassword"
 }
 ```
 
@@ -57,7 +57,7 @@ Content-Type: application/json
 {
   "message": "Login successful",
   "user_id": 1,
-  "name": "John Doe"
+  "name": "John"
 }
 ```
 
@@ -84,8 +84,8 @@ GET /profile/{user_id}
 ```json
 {
   "id": 1,
-  "name": "John Doe",
-  "email": "john@example.com",
+  "name": "John",
+  "email": "john@gmail.com",
   "bio": "I love teaching and learning new skills!",
   "location": "San Francisco, CA",
   "skills_to_offer": ["Python", "JavaScript", "Cooking"],
@@ -172,8 +172,8 @@ GET /matches/{user_id}
   "matches": [
     {
       "id": 2,
-      "name": "Jane Smith",
-      "email": "jane@example.com",
+      "name": "Jane",
+      "email": "jane@gmail.com",
       "bio": "Passionate about music and languages",
       "location": "San Francisco, CA",
       "skills_to_offer": ["Guitar", "Spanish"],
@@ -301,6 +301,26 @@ DELETE /chats/{chat_id}
 }
 ```
 
+#### Mark Messages as Read
+```http
+PUT /chats/{chat_id}/messages/read
+Content-Type: application/json
+```
+
+**Request Body:**
+```json
+{
+  "user_id": 1
+}
+```
+
+**Response:**
+```json
+{
+  "message": "Messages marked as read"
+}
+```
+
 ### Ratings
 
 #### Get User Ratings
@@ -353,9 +373,6 @@ Content-Type: application/json
 ```
 
 ## Error Responses
-
-All endpoints may return the following error responses:
-
 ### 400 Bad Request
 ```json
 {
@@ -412,6 +429,5 @@ The API supports CORS for cross-origin requests from the frontend application.
 
 ## Additional Resources
 
-- **📖 [Setup Guide](SETUP_GUIDE.md)** - Complete setup instructions
-- **🤖 [AI Setup Guide](SETUP_AI.md)** - Google Gemini API setup and AI matching details
-- **🗄️ [Database Documentation](DATABASE.md)** - Database schema and operations 
+- **[AI Setup Guide](SETUP_AI.md)** - Google Gemini API setup and AI matching details
+- **[Database Documentation](DATABASE.md)** - Database schema and operations 

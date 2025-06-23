@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./ChatPage.css"; // (create this file for styling)
-import ChatThread from "./ChatThread";
-import MessageInput from "./MessageInput";
-import RatingForm from "./RatingForm";
-import UserDropdown from "./UserDropdown";
+import ChatThread from "../ChatThread/ChatThread";
+import MessageInput from "../MessageInput/MessageInput";
+import RatingForm from "../RatingForm/RatingForm";
+import UserDropdown from "../UserDropdown/UserDropdown";
 import axios from "axios";
-import { API_URL } from "../App";
+import { API_URL } from "../../App";
+import LegoAvatar from "../../assets/lego-avatar.jpg";
 
 const ChatPage = ({ match, matches, onSelectConversation, onBack, user, onNavigate, onLogout, onRatingSuccess }) => {
   const [messages, setMessages] = useState([]);
@@ -23,7 +24,7 @@ const ChatPage = ({ match, matches, onSelectConversation, onBack, user, onNaviga
   const getOtherUserAvatar = (conversation) => {
     const avatarUrl = conversation.other_user?.avatar;
     if (!avatarUrl) {
-      return 'https://randomuser.me/api/portraits/lego/1.jpg';
+      return LegoAvatar;
     }
     return avatarUrl.startsWith('http') ? avatarUrl : `${API_URL}${avatarUrl}`;
   };
@@ -89,9 +90,8 @@ const ChatPage = ({ match, matches, onSelectConversation, onBack, user, onNaviga
       console.error("Error sending message:", error);
       // Remove the optimistic message on error
       setMessages(prev => prev.filter(msg => msg !== newMessage));
-      
       // Show user-friendly error message
-      const errorMessage = error.response?.data?.message || "Failed to send message. Please try again.";
+      const errorMessage = error.response?.data?.message || error.response?.data?.error || "Failed to send message. Please try again.";
       alert(errorMessage);
     }
   };
@@ -119,7 +119,7 @@ const ChatPage = ({ match, matches, onSelectConversation, onBack, user, onNaviga
       }
     } catch (error) {
       console.error("Error submitting rating:", error);
-      alert(error.response?.data?.message || "Failed to submit rating. Please try again.");
+      alert(error.response?.data?.message || error.response?.data?.error || "Failed to submit rating. Please try again.");
     }
   };
 

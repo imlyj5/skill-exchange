@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./UserDropdown.css";
-import { API_URL } from "../App";
+import { API_URL } from "../../App";
+import LegoAvatar from "../../assets/lego-avatar.jpg";
 
 const UserDropdown = ({ user, onNavigate, onLogout }) => {
   const [open, setOpen] = useState(false);
@@ -26,7 +27,7 @@ const UserDropdown = ({ user, onNavigate, onLogout }) => {
   
   const getImageUrl = () => {
     if (!user.image_url) {
-      return 'https://randomuser.me/api/portraits/lego/1.jpg';
+      return LegoAvatar;
     }
     if (user.image_url.startsWith('http')) {
       return user.image_url;

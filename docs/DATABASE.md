@@ -56,7 +56,7 @@ CREATE TABLE chats (
 - `id`: Primary key, auto-incrementing
 - `user1_id`: Foreign key to first user
 - `user2_id`: Foreign key to second user
-- `created_at`: When the chat was created (with timezone)
+- `created_at`: When the chat was created
 
 #### 3. Messages Table
 ```sql
@@ -75,7 +75,7 @@ CREATE TABLE messages (
 - `chat_id`: Foreign key to chats table
 - `sender_id`: Foreign key to users table (who sent the message)
 - `content`: Message text content
-- `timestamp`: When the message was sent (with timezone)
+- `timestamp`: When the message was sent
 - `is_read`: Whether the message has been read
 
 #### 4. Ratings Table
@@ -98,7 +98,7 @@ CREATE TABLE ratings (
 - `chat_id`: Foreign key to chats table (which chat the rating is for)
 - `rating`: Rating value (1-5 stars)
 - `comment`: Optional comment about the experience
-- `timestamp`: When the rating was created (with timezone)
+- `timestamp`: When the rating was created
 
 ## Database Setup
 
@@ -106,18 +106,7 @@ CREATE TABLE ratings (
 
 1. **Install PostgreSQL**
    ```bash
-   # macOS
    brew install postgresql
-   brew services start postgresql
-   
-   # Ubuntu/Debian
-   sudo apt update
-   sudo apt install postgresql postgresql-contrib
-   sudo systemctl start postgresql
-   sudo systemctl enable postgresql
-   
-   # Windows
-   # Download from https://www.postgresql.org/download/windows/
    ```
 
 2. **Verify Installation**
@@ -125,26 +114,11 @@ CREATE TABLE ratings (
    psql --version
    ```
 
-### Automated Setup
-
-Use the provided setup script:
-```bash
-./scripts/db-setup.sh
-```
-
-This script will:
-- Check PostgreSQL installation
-- Create database and user
-- Configure environment variables
-- Run migrations
-- Test connection
-- Optionally create sample data
-
 ### Manual Setup
 
 1. **Create Database and User**
    ```bash
-   # Connect to PostgreSQL as superuser
+   # Connect to PostgreSQL
    psql postgres
    
    # Create user and database
@@ -158,15 +132,13 @@ This script will:
    Create `backend/.env`:
    ```env
    SQLALCHEMY_DATABASE_URI=postgresql://skill_user:your_password@localhost:5432/skill_exchange
-   GEMINI_API_KEY=your-gemini-api-key-here
-   FLASK_ENV=development
-   FLASK_DEBUG=1
-   SECRET_KEY=your-secret-key-here
+   GEMINI_API_KEY=your-gemini-api-key-here (Optional)
    ```
 
 3. **Run Migrations**
    ```bash
    cd backend
+   python3 -m venv venv
    source venv/bin/activate
    flask db upgrade
    ```
@@ -291,207 +263,3 @@ flask db current
 
 4. **Add Is Read** (`880cde487140_add_is_read_to_message_model.py`)
    - Adds is_read field to messages table
-
-## Database Operations
-
-### Common Queries
-
-#### Get User with Skills
-```python
-user = User.query.filter_by(email='john@example.com').first()
-print(f"User: {user.name}")
-print(f"Teaches: {user.skills_to_offer}")
-print(f"Wants to learn: {user.skills_to_learn}")
-print(f"Average rating: {user.average_rating}")
-```
-
-#### Get User's Chats
-```python
-# Get chats where user is user1
-chats_as_user1 = Chat.query.filter_by(user1_id=user_id).all()
-# Get chats where user is user2
-chats_as_user2 = Chat.query.filter_by(user2_id=user_id).all()
-# Combine both
-all_chats = chats_as_user1 + chats_as_user2
-```
-
-#### Get Chat Messages
-```python
-messages = Message.query.filter_by(chat_id=chat_id).order_by(Message.timestamp).all()
-```
-
-#### Get User Ratings
-```python
-ratings = Rating.query.filter_by(rated_id=user_id).all()
-average_rating = db.session.query(func.avg(Rating.rating)).filter_by(rated_id=user_id).scalar()
-```
-
-### Performance Optimization
-
-#### Indexes
-```sql
--- Add indexes for frequently queried columns
-CREATE INDEX idx_users_email ON users(email);
-CREATE INDEX idx_chats_user1_id ON chats(user1_id);
-CREATE INDEX idx_chats_user2_id ON chats(user2_id);
-CREATE INDEX idx_messages_chat_id ON messages(chat_id);
-CREATE INDEX idx_messages_sender_id ON messages(sender_id);
-CREATE INDEX idx_ratings_rated_id ON ratings(rated_id);
-CREATE INDEX idx_ratings_chat_id ON ratings(chat_id);
-```
-
-#### Connection Pooling
-```python
-# In app configuration
-app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
-    'pool_size': 10,
-    'pool_recycle': 3600,
-    'pool_pre_ping': True
-}
-```
-
-## Backup and Recovery
-
-### Backup Database
-```bash
-# Create backup
-pg_dump skill_exchange > backup_$(date +%Y%m%d_%H%M%S).sql
-
-# Create compressed backup
-pg_dump skill_exchange | gzip > backup_$(date +%Y%m%d_%H%M%S).sql.gz
-```
-
-### Restore Database
-```bash
-# Restore from backup
-psql skill_exchange < backup_20240115_143000.sql
-
-# Restore from compressed backup
-gunzip -c backup_20240115_143000.sql.gz | psql skill_exchange
-```
-
-### Automated Backups
-```bash
-#!/bin/bash
-# backup_script.sh
-BACKUP_DIR="/path/to/backups"
-DB_NAME="skill_exchange"
-DATE=$(date +%Y%m%d_%H%M%S)
-
-pg_dump $DB_NAME | gzip > $BACKUP_DIR/backup_$DATE.sql.gz
-
-# Keep only last 7 days of backups
-find $BACKUP_DIR -name "backup_*.sql.gz" -mtime +7 -delete
-```
-
-Add to crontab:
-```bash
-# Daily backup at 2 AM
-0 2 * * * /path/to/backup_script.sh
-```
-
-## Troubleshooting
-
-### Common Issues
-
-1. **Connection Refused**
-   ```bash
-   # Check if PostgreSQL is running
-   sudo systemctl status postgresql
-   
-   # Start PostgreSQL
-   sudo systemctl start postgresql
-   ```
-
-2. **Permission Denied**
-   ```bash
-   # Check PostgreSQL logs
-   sudo tail -f /var/log/postgresql/postgresql-*.log
-   
-   # Fix permissions
-   sudo chown -R postgres:postgres /var/lib/postgresql
-   ```
-
-3. **Migration Errors**
-   ```bash
-   # Check migration status
-   flask db current
-   
-   # Reset migrations (WARNING: This will lose data)
-   flask db stamp head
-   flask db migrate
-   flask db upgrade
-   ```
-
-### Performance Issues
-
-1. **Slow Queries**
-   ```sql
-   -- Enable query logging
-   ALTER SYSTEM SET log_statement = 'all';
-   SELECT pg_reload_conf();
-   ```
-
-2. **Connection Pool Exhaustion**
-   ```python
-   # Increase pool size
-   app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
-       'pool_size': 20,
-       'max_overflow': 30
-   }
-   ```
-
-## Security Considerations
-
-1. **Use Environment Variables**
-   - Never hardcode database credentials
-   - Use `.env` files for configuration
-
-2. **Database Permissions**
-   ```sql
-   -- Create read-only user for analytics
-   CREATE USER readonly_user WITH PASSWORD 'password';
-   GRANT CONNECT ON DATABASE skill_exchange TO readonly_user;
-   GRANT USAGE ON SCHEMA public TO readonly_user;
-   GRANT SELECT ON ALL TABLES IN SCHEMA public TO readonly_user;
-   ```
-
-3. **Encrypt Connections**
-   ```python
-   # Use SSL connections in production
-   SQLALCHEMY_DATABASE_URI = "postgresql://user:pass@host:port/db?sslmode=require"
-   ```
-
-4. **Regular Updates**
-   - Keep PostgreSQL updated
-   - Monitor security advisories
-   - Apply security patches promptly
-
-## Monitoring
-
-### Database Metrics
-```sql
--- Check database size
-SELECT pg_size_pretty(pg_database_size('skill_exchange'));
-
--- Check table sizes
-SELECT 
-    schemaname,
-    tablename,
-    pg_size_pretty(pg_total_relation_size(schemaname||'.'||tablename)) as size
-FROM pg_tables 
-WHERE schemaname = 'public'
-ORDER BY pg_total_relation_size(schemaname||'.'||tablename) DESC;
-
--- Check active connections
-SELECT count(*) FROM pg_stat_activity WHERE state = 'active';
-```
-
-### Log Monitoring
-```bash
-# Monitor PostgreSQL logs
-tail -f /var/log/postgresql/postgresql-*.log | grep -E "(ERROR|WARNING)"
-
-# Monitor slow queries
-tail -f /var/log/postgresql/postgresql-*.log | grep "duration:"
-``` 

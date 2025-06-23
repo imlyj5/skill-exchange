@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import './App.css';
 import axios from 'axios';
-import LandingPage from './components/LandingPage';
-import ProfilePage from './components/ProfilePage';
-import MatchSuggestionsPage from './components/MatchSuggestionsPage';
-import ChatPage from './components/ChatPage';
-import HowItWorksPage from './components/HowItWorksPage';
-import UserDropdown from './components/UserDropdown';
+import LandingPage from './components/LandingPage/LandingPage';
+import ProfilePage from './components/ProfilePage/ProfilePage';
+import MatchSuggestionsPage from './components/MatchSuggestionsPage/MatchSuggestionsPage';
+import ChatPage from './components/ChatPage/ChatPage';
+import HowItWorksPage from './components/HowItWorksPage/HowItWorksPage';
+import UserDropdown from './components/UserDropdown/UserDropdown';
 
 export const API_URL = 'http://127.0.0.1:5000'; // Update to your Flask backend URL
 

@@ -148,3 +148,9 @@
 .arrow-btn:not(:disabled):hover {
   color: #311b92;
 }
+
+.match-suggestions-title {
+  font-family: 'Lilita One', cursive, sans-serif !important;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}

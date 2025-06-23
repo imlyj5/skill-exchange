@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./MatchSuggestionsPage.css";
-import MatchCard from "./MatchCard";
-import UserDropdown from "./UserDropdown";
-import ProfilePage from "./ProfilePage";
-import { API_URL } from "../App";
+import MatchCard from "../MatchCard/MatchCard";
+import UserDropdown from "../UserDropdown/UserDropdown";
+import ProfilePage from "../ProfilePage/ProfilePage";
+import { API_URL } from "../../App";
 
 const CARDS_PER_VIEW = 3;
 
@@ -76,7 +76,7 @@ const MatchSuggestionsPage = ({
         <UserDropdown user={user} onNavigate={onNavigate} onLogout={onLogout} />
       </div>
       <div className="match-title">
-        <h1>MATCH SUGGESTIONS</h1>
+        <h1 className="match-suggestions-title">Match Suggestions</h1>
         <p>Here are your perfect learning partner! Chat Now!</p>
       </div>
       <div className="match-cards-row">

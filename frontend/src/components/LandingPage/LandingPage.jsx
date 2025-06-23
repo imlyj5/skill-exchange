@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./LandingPage.css"; // We'll create this for styling
-import LoginForm from "./LoginForm";
-import SignupForm from "./SignupForm";
-import LandingImg from "../assets/Landing.png";
+import LoginForm from "../LoginForm/LoginForm";
+import SignupForm from "../SignupForm/SignupForm";
+// Illustration source: https://blush.design/collections/2CS20tnIa14HG1NsRPdP/brazuca
+import LandingImg from "../../assets/Landing.png";
 
 const LandingPage = ({ onLogin, onNavigate }) => {
   const [showModal, setShowModal] = useState(false);

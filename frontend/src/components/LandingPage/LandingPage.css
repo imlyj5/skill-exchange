@@ -1,6 +1,6 @@
 .landing-root {
   min-height: 100vh;
-  background: #fafafa url('../assets/LandingBackground.png') no-repeat right center;
+  background: #fafafa url('../../assets/LandingBackground.png') no-repeat right center;
   background-size: contain;
   display: flex;
   flex-direction: column;
@@ -50,9 +50,10 @@
 
 .landing-title {
   font-size: 3rem;
-  font-family: 'Luckiest Guy', cursive, sans-serif;
+  font-family: 'Lilita One', cursive, sans-serif;
   margin-bottom: 1rem;
   line-height: 1.1;
+  background: none;
 }
 
 .landing-subtitle {
