@@ -19,6 +19,7 @@ const MatchSuggestionsPage = ({
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(false);
   const [startIdx, setStartIdx] = useState(0);
+  const [aiEnabled, setAiEnabled] = useState(false);
 
   useEffect(() => {
     if (user && user.id) {
@@ -27,6 +28,7 @@ const MatchSuggestionsPage = ({
         .then(res => res.json())
         .then(data => {
           setMatches(data.matches || []);
+          setAiEnabled(data.ai_enabled);
         })
         .catch(() => setMatches([]))
         .finally(() => setLoading(false));
@@ -100,6 +102,15 @@ const MatchSuggestionsPage = ({
           disabled={startIdx + CARDS_PER_VIEW >= (matches || []).length}
         >{'>'}</button>
       </div>
+      {aiEnabled ? (
+        <div className="ai-status ai-enabled">
+          AI Matching is enabled!
+        </div>
+      ) : (
+        <div className="ai-status ai-disabled">
+          AI Matching is currently unavailable due to quota may be exceeded.
+        </div>
+      )}
     </div>
   );
 };
